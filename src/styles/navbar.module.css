@@ -1,0 +1,13 @@
+.color_nav {
+  border-style: solid;
+  border-color: rgba(194, 224, 255, 0.08);
+  border-width: 0px 0px thin;
+}
+
+img {
+  margin-left: -27px;
+}
+
+.custom_toggler span {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27rgba%28102, 178, 255, 1%29%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e");
+}

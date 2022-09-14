@@ -1,0 +1,82 @@
+.container {
+  margin-top: 60px;
+  width: 100%;
+}
+
+.compose_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+form {
+  margin-top: 50px;
+}
+
+.control:focus {
+  box-shadow: none !important;
+}
+
+.label {
+  display: flex;
+  color: white;
+  margin-top: 10px;
+}
+
+.input {
+  display: flex;
+  margin-top: 3px;
+}
+
+.comp_btn {
+  margin-top: 20px;
+  width: 100px;
+}
+
+input,
+textarea {
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  border: 0.5px solid #ccc;
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.success {
+  color: lightgreen;
+  margin-top: 20px;
+  margin-left: 180px;
+}
+
+.logout_btn {
+  position: absolute;
+  right: 50px;
+  margin-top: 0px;
+}
+
+.form_container {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add_notes_btn {
+  margin-top: 19px;
+}
+
+@media screen and (max-width: 550px) {
+  .logout_btn {
+    right: 10px;
+  }
+  .btn_span {
+    font-size: smaller;
+  }
+}

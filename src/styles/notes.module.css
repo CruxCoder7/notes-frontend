@@ -1,0 +1,95 @@
+.note_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 66px;
+}
+
+.note_container h2 {
+  color: white;
+}
+
+.card_container {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: 0.7;
+}
+
+.dropdown {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.dropdown_act:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.containerr {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.containerr h1 {
+  color: rgb(236, 160, 160);
+}
+
+.card {
+  width: 18rem;
+  height: calc(100% - 49px);
+}
+
+.card:hover {
+  box-shadow: 0 0 11px rgb(125, 190, 255);
+}
+
+@media only screen and (max-width: 550px) {
+  .card_container {
+    grid-template-columns: auto;
+  }
+}
+
+@media only screen and (min-width: 551px) {
+  .card_container {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .card_container {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .containerr h1 {
+    font-size: small;
+  }
+}
+
+.icon {
+  background-color: transparent;
+  float: right;
+  color: #000;
+  margin-right: 15px;
+}
+
+.icon:hover {
+  cursor: pointer;
+}

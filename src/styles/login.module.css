@@ -1,0 +1,23 @@
+.admin_form {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin_form label {
+  color: white;
+}
+
+.admin_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  color: white;
+}
+
+.control:focus {
+  box-shadow: none !important;
+}
