@@ -28,6 +28,7 @@ function LoginForm({ login, err, setErr }) {
             <Form.Label>Email Address</Form.Label>
             <Form.Control
               type="email"
+              id="email"
               placeholder="Enter email"
               onChange={(e) =>
                 setDetails({ ...details, email: e.target.value })
@@ -35,6 +36,7 @@ function LoginForm({ login, err, setErr }) {
               value={details.email}
               className={styles.control}
               required
+              autoComplete="on"
             />
           </Form.Group>
           <Form.Group className="mb-3">
@@ -53,7 +55,9 @@ function LoginForm({ login, err, setErr }) {
           <Button variant="primary" type="submit">
             Submit
           </Button>
-          <h5 style={{ color: "red", textAlign: "center" }}>{err}</h5>
+          <h5 style={{ color: "red", textAlign: "center", marginTop: "20px" }}>
+            {err}
+          </h5>
         </Form>
       </div>
     </>

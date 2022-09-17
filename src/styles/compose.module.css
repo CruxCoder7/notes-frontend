@@ -61,7 +61,7 @@ textarea:focus {
 }
 
 .form_container {
-  margin-top: 30px;
+  margin-top: 0px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -78,5 +78,8 @@ textarea:focus {
   }
   .btn_span {
     font-size: smaller;
+  }
+  .success {
+    margin-left: 0px;
   }
 }

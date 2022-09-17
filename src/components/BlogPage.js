@@ -8,19 +8,23 @@ import { AiFillDelete } from "react-icons/ai";
 import { GrUpdate } from "react-icons/gr";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
 
 function BlogPage({ auth, del }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    const url = "https://notes-blog-backend.herokuapp.com/api/blogs";
-    axios.get(url).then((res) => {
-      setBlogs(res.data);
-    });
-  }, []);
-
+  // useEffect(() => {
+  //   const url = "https://notes-blog-backend.herokuapp.com/api/blogs";
+  //   axios.get(url).then((res) => {
+  //     setBlogs(res.data);
+  //   });
+  // }, []);
+  const { data } = useSWR(
+    "https://notes-blog-backend.herokuapp.com/api/blogs",
+    (url) => axios(url).then((r) => r.data)
+  );
   if (del) {
     const { id } = location.state;
     const url = `https://notes-blog-backend.herokuapp.com/api/blogs/del/${id}`;
@@ -32,9 +36,9 @@ function BlogPage({ auth, del }) {
       <div>
         <h2 className={styles.heading}>BLOGS</h2>
       </div>
-      {blogs.length > 0 ? (
-        <div className={styles1.card_container}>
-          {blogs.map((blog, i) => {
+      <div className={styles1.card_container}>
+        {data &&
+          data.map((blog, i) => {
             return (
               <div className={styles.card} key={i}>
                 <Card
@@ -103,12 +107,7 @@ function BlogPage({ auth, del }) {
               </div>
             );
           })}
-        </div>
-      ) : (
-        <div className={styles.containerr}>
-          <h1> NO BLOGS UPLOADED YET </h1>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -9,6 +9,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { GrUpdate } from "react-icons/gr";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import useSWR from "swr";
 
 const NoteComp = ({ data, auth }) => {
   return (
@@ -46,6 +47,7 @@ const NoteComp = ({ data, auth }) => {
                     id: data._id,
                     subject: data.subject,
                     topic: data.topic,
+                    semester: data.semester,
                     url: data.url,
                   }}
                 >
@@ -60,20 +62,24 @@ const NoteComp = ({ data, auth }) => {
   );
 };
 
-const NoteFunc = (filter, notes = [], auth) => {
+const NoteFunc = (filter, Semester, notes = [], auth) => {
   if (filter === "All") {
     return (
       <div className={styles.card_container}>
-        {notes.map((note, i) => {
-          return <NoteComp data={note} key={i} auth={auth}></NoteComp>;
-        })}
+        {notes
+          .filter((note) => note.semester === Semester)
+          .map((note, i) => {
+            return <NoteComp data={note} key={i} auth={auth}></NoteComp>;
+          })}
       </div>
     );
   } else {
     return (
       <div className={styles.card_container}>
         {notes
-          .filter((data) => data.subject === filter)
+          .filter(
+            (data) => data.subject === filter && data.semester === Semester
+          )
           .map((note, i) => {
             return <NoteComp data={note} key={i} auth={auth}></NoteComp>;
           })}
@@ -87,14 +93,19 @@ function Notes({ auth, del }) {
   const navigate = useNavigate();
 
   const [filter, setFilter] = useState("All");
-  const [notes, setNotes] = useState([]);
-
-  useEffect(() => {
-    const url = "https://notes-blog-backend.herokuapp.com/api/notes";
-    axios.get(url).then((res) => {
-      setNotes(res.data);
-    });
-  }, []);
+  const [Semester, setSemester] = useState(1);
+  // const [notes, setNotes] = useState([]);
+  const { data } = useSWR(
+    "https://notes-blog-backend.herokuapp.com/api/notes",
+    (url) => axios.get(url).then((r) => r.data)
+  );
+  // console.log(data);
+  // useEffect(() => {
+  //   const url = "https://notes-blog-backend.herokuapp.com/api/notes";
+  //   axios.get(url).then((res) => {
+  //     setNotes(res.data);
+  //   });
+  // }, []);
 
   if (del) {
     const { id } = location.state;
@@ -104,40 +115,122 @@ function Notes({ auth, del }) {
   return (
     <>
       <div className={styles.note_container}>
-        <h2> {filter} Notes </h2>
+        <h2>
+          {filter} Semester {Semester} Notes{" "}
+        </h2>
       </div>
-      <div className={styles.dropdown}>
-        <DropdownButton
-          id="dropdown-basic-button"
-          title="Filters"
-          className={styles.dropdown_act}
-        >
-          <Dropdown.Item onClick={() => setFilter("All")}>All</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("Linear Algebra")}>
-            Linear Algebra
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("Digital Design")}>
-            Digital Design
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("Physics")}>
-            Physics
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("EVS")}>EVS</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("English")}>
-            English
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter("Prog in C")}>
-            Prog in C
-          </Dropdown.Item>
-        </DropdownButton>
-      </div>
-      {notes.length > 0 ? (
-        NoteFunc(filter, notes, auth)
-      ) : (
-        <div className={styles.containerr}>
-          <h1> NO NOTES UPLOADED YET </h1>
+      <div style={{ display: "flex" }}>
+        <div className={styles.dropdown}>
+          <DropdownButton
+            id="dropdown-basic-button"
+            title="Subject"
+            className={styles.dropdown_act}
+          >
+            <Dropdown.Item onClick={() => setFilter("All")}>All</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("Linear Algebra");
+                else if (Semester === 2) setFilter("Python");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Linear Algebra
+                </span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>Python</span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("Digital Design");
+                else if (Semester === 2) setFilter("COA");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Digital Design
+                </span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>COA</span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("EVS");
+                else if (Semester === 2) setFilter("Data Structures");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>EVS</span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Data Structures
+                </span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("Prog in C");
+                else if (Semester === 2) setFilter("FDS");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Prog in C
+                </span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>FDS</span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("Physics");
+                else if (Semester === 2) setFilter("SFDS");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>Physics</span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>SFDS</span>
+              )}
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                if (Semester === 1) setFilter("Comm English");
+                else if (Semester === 2) setFilter("Engg English");
+              }}
+            >
+              {Semester === 1 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Comm English
+                </span>
+              )}
+              {Semester === 2 && (
+                <span style={{ backgroundColor: "transparent" }}>
+                  Engg English
+                </span>
+              )}
+            </Dropdown.Item>
+          </DropdownButton>
         </div>
-      )}
+        <div className={styles.dropdown}>
+          <DropdownButton
+            id="dropdown-basic-button"
+            title="Semester"
+            className={styles.dropdown_act}
+          >
+            <Dropdown.Item onClick={() => setSemester(1)}>1</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSemester(2)}>2</Dropdown.Item>
+          </DropdownButton>
+        </div>
+      </div>
+      {NoteFunc(filter, Semester, data, auth)}
     </>
   );
 }

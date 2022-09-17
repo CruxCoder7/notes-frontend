@@ -9,7 +9,6 @@ import Form from "react-bootstrap/Form";
 function Compose({ logout, update }) {
   const location = useLocation();
 
-  console.log(update);
   const [authenticated, setauthenticated] = useState(null);
   const [title, setTitle] = useState(update ? location.state.titlee : "");
   const [content, setContent] = useState(update ? location.state.contentt : "");
