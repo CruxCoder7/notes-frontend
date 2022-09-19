@@ -12,9 +12,7 @@ function AddNotes({ logout, update }) {
   const [authenticated, setauthenticated] = useState(null);
   const [subject, setSubject] = useState(update ? location.state.subject : "");
   const [topic, setTopic] = useState(update ? location.state.topic : "");
-  const [semester, setSemester] = useState(
-    update ? location.state.semester : ""
-  );
+
   const [url, setUrl] = useState(update ? location.state.url : "");
   const [successMsg, setSuccessMsg] = useState("");
 
@@ -38,12 +36,10 @@ function AddNotes({ logout, update }) {
       .post(URL, {
         subject: subject,
         topic: topic,
-        semester: semester,
         url: url,
       })
       .then(setSubject(""))
       .then(setTopic(""))
-      .then(setSemester(""))
       .then(setUrl(""))
       .then(setSuccessMsg("Notes have been successfully added!"))
       .then(handleSuccess());
@@ -56,12 +52,10 @@ function AddNotes({ logout, update }) {
       .patch(URL, {
         subject: subject,
         topic: topic,
-        semester: semester,
         url: url,
       })
       .then(setSubject(""))
       .then(setTopic(""))
-      .then(setSemester(""))
       .then(setUrl(""))
       .then(setSuccessMsg("Notes have been successfully updated!"))
       .then(handleSuccess());
@@ -110,18 +104,6 @@ function AddNotes({ logout, update }) {
                   id="topic"
                   onChange={(e) => setTopic(e.target.value)}
                   value={topic}
-                  className={styles.control}
-                  required
-                ></Form.Control>
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label className={styles.label}>Semester</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="semester"
-                  id="semester"
-                  onChange={(e) => setSemester(e.target.value)}
-                  value={semester}
                   className={styles.control}
                   required
                 ></Form.Control>

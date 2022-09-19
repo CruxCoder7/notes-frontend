@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
 import styles from "../styles/blog.module.css";
 import Card from "react-bootstrap/Card";
@@ -13,14 +13,6 @@ import useSWR from "swr";
 function BlogPage({ auth, del }) {
   const location = useLocation();
   const navigate = useNavigate();
-  // const [blogs, setBlogs] = useState([]);
-
-  // useEffect(() => {
-  //   const url = "https://notes-blog-backend.herokuapp.com/api/blogs";
-  //   axios.get(url).then((res) => {
-  //     setBlogs(res.data);
-  //   });
-  // }, []);
   const { data } = useSWR(
     "https://notes-blog-backend.herokuapp.com/api/blogs",
     (url) => axios(url).then((r) => r.data)
