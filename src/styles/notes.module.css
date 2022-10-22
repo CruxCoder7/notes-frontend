@@ -59,8 +59,8 @@
 }
 
 .card {
-  width: 18rem;
   height: calc(100% - 49px);
+  background-color: rgb(102, 178, 255);
 }
 
 .card:hover {

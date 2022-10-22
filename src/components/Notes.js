@@ -18,14 +18,22 @@ const NoteComp = ({ data, auth }) => {
       <Card
         text="dark"
         className="mb-5"
-        style={{ height: "10rem", backgroundColor: "rgb(102, 178, 255)" }}
+        style={{
+          width: "18rem",
+          backgroundColor: "rgb(102, 178, 255)",
+        }}
+        // style={{ height: "10rem", backgroundColor: "rgb(102, 178, 255)" }}
       >
         <Card.Header
           style={{ color: "#000", fontSize: "20px", fontWeight: "bold" }}
         >
           {data.subject}
         </Card.Header>
-        <Card.Body style={{ backgroundColor: "rgb(102, 178, 255)" }}>
+        <Card.Body
+          style={{
+            backgroundColor: "rgb(102, 178, 255)",
+          }}
+        >
           <Card.Title style={{ backgroundColor: "rgb(102, 178, 255)" }}>
             {data.topic}
           </Card.Title>
