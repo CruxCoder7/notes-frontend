@@ -100,8 +100,7 @@ function Notes({ auth, del }) {
                 val.subject.toLowerCase().includes(search.toLocaleLowerCase())
               ) {
                 return val;
-              }
-              return 0;
+              } else return 0;
             })
             .map((note, i) => {
               return <NoteComp data={note} key={i} auth={auth}></NoteComp>;

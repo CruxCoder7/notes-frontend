@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Notes from "./components/Notes";
 import LoginForm from "./components/LoginForm";
 import BlogPage from "./components/BlogPage";
@@ -18,16 +19,21 @@ function App() {
 
   const [err, setErr] = useState("");
 
-  const Login = (details) => {
-    console.log(process.env.REACT_APP_ADMIN_EMAIL);
-    console.log(process.env.REACT_APP_ADMIN_PASSWORD);
-    if (
-      details.email === process.env.REACT_APP_ADMIN_EMAIL &&
-      details.password === process.env.REACT_APP_ADMIN_PASSWORD
-    ) {
+  const Login = (token) => {
+    // if (
+    //   details.email === process.env.REACT_APP_ADMIN_EMAIL &&
+    //   details.password === process.env.REACT_APP_ADMIN_PASSWORD
+    // ) {
+    //   setauthenticated(true);
+    //   localStorage.setItem("authenticated", true);
+    //   navigate("/compose/blogs");
+    // } else {
+    //   setErr("Invalid Credentials!");
+    // }
+    if (token) {
       setauthenticated(true);
-      localStorage.setItem("authenticated", true);
-      navigate("/compose/blogs");
+      localStorage.setItem("authenticated", token);
+      navigate("/compose/blogs", { state: { token } });
     } else {
       setErr("Invalid Credentials!");
     }

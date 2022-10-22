@@ -17,11 +17,28 @@ function AddNotes({ logout, update }) {
   const [successMsg, setSuccessMsg] = useState("");
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
+    const url = "http://localhost:3001/api/verify";
+
+    if (location.state?.token) {
+      axios.post(url, { token: location.state.token }).then((response) => {
+        if (response.data.message === "success") {
+          setauthenticated(true);
+        } else {
+          setauthenticated(false);
+        }
+      });
+    } else {
+      axios
+        .post(url, { token: localStorage.getItem("authenticated") })
+        .then((response) => {
+          if (response.data.message === "success") {
+            setauthenticated(true);
+          } else {
+            setauthenticated(false);
+          }
+        });
     }
-  }, []);
+  }, [location.state?.token]);
 
   const handleSuccess = () => {
     setTimeout(() => {

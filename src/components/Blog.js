@@ -13,6 +13,7 @@ function Blog() {
   );
   return (
     <div>
+      <head>BLOG</head>
       <h2 className={styles.heading}>{data && data.title}</h2>
       <div className={styles.container}>
         <div className={styles.content}>{data && data.content}</div>

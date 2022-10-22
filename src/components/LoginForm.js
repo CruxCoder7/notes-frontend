@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import styles from "../styles/login.module.css";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
 
 function LoginForm({ login, err, setErr }) {
   const [details, setDetails] = useState({ email: "", password: "" });
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(details);
-    setDetails({ email: "", password: "" });
-    setTimeout(() => {
-      setErr("");
-    }, 3000);
+    const url = "http://localhost:3001/api/login";
+    axios
+      .post(url, { email: details.email, pwd: details.password })
+      .then((response) => login(response.data));
   };
   return (
     <>
@@ -29,6 +29,7 @@ function LoginForm({ login, err, setErr }) {
             <Form.Control
               type="email"
               id="email"
+              name="email"
               placeholder="Enter email"
               onChange={(e) =>
                 setDetails({ ...details, email: e.target.value })
@@ -49,6 +50,7 @@ function LoginForm({ login, err, setErr }) {
               }
               value={details.password}
               className={styles.control}
+              name="password"
               required
             />
           </Form.Group>

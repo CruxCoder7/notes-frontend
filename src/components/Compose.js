@@ -8,18 +8,34 @@ import Form from "react-bootstrap/Form";
 
 function Compose({ logout, update }) {
   const location = useLocation();
-
   const [authenticated, setauthenticated] = useState(null);
   const [title, setTitle] = useState(update ? location.state.titlee : "");
   const [content, setContent] = useState(update ? location.state.contentt : "");
   const [successMsg, setSuccessMsg] = useState("");
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("authenticated");
-    if (loggedInUser) {
-      setauthenticated(loggedInUser);
+    const url = "http://localhost:3001/api/verify";
+
+    if (location.state?.token) {
+      axios.post(url, { token: location.state.token }).then((response) => {
+        if (response.data.message === "success") {
+          setauthenticated(true);
+        } else {
+          setauthenticated(false);
+        }
+      });
+    } else {
+      axios
+        .post(url, { token: localStorage.getItem("authenticated") })
+        .then((response) => {
+          if (response.data.message === "success") {
+            setauthenticated(true);
+          } else {
+            setauthenticated(false);
+          }
+        });
     }
-  }, []);
+  }, [location.state?.token]);
 
   const handleSuccess = () => {
     setTimeout(() => {
@@ -108,7 +124,10 @@ function Compose({ logout, update }) {
                 Post
               </Button>
               <br></br>
-              <Link to="/compose/notes">
+              <Link
+                to="/compose/notes"
+                state={{ token: location.state?.token }}
+              >
                 <Button
                   variant="primary"
                   size="lg"
