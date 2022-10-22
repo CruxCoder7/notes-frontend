@@ -17,7 +17,7 @@ function AddNotes({ logout, update }) {
   const [successMsg, setSuccessMsg] = useState("");
 
   useEffect(() => {
-    const url = "http://localhost:3001/api/verify";
+    const url = "https://notes-blog-backend.herokuapp.com/api/verify";
 
     if (location.state?.token) {
       axios.post(url, { token: location.state.token }).then((response) => {

@@ -8,7 +8,7 @@ function LoginForm({ login, err, setErr }) {
   const [details, setDetails] = useState({ email: "", password: "" });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:3001/api/login";
+    const url = "https://notes-blog-backend.herokuapp.com/api/login";
     axios
       .post(url, { email: details.email, pwd: details.password })
       .then((response) => login(response.data));
