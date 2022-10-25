@@ -12,6 +12,10 @@ function LoginForm({ login, err, setErr }) {
     axios
       .post(url, { email: details.email, pwd: details.password })
       .then((response) => login(response.data));
+
+    setTimeout(() => {
+      setErr("");
+    }, 3000);
   };
   return (
     <>

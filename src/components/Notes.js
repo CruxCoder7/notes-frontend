@@ -14,59 +14,68 @@ import useSWR from "swr";
 
 const NoteComp = ({ data, auth }) => {
   return (
-    <div className={styles.card}>
-      <Card
-        text="dark"
-        className="mb-5"
-        style={{
-          width: "18rem",
-          backgroundColor: "rgb(102, 178, 255)",
-        }}
-        // style={{ height: "10rem", backgroundColor: "rgb(102, 178, 255)" }}
-      >
-        <Card.Header
-          style={{ color: "#000", fontSize: "20px", fontWeight: "bold" }}
-        >
-          {data.subject}
-        </Card.Header>
-        <Card.Body
+    <>
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6574714792618765"
+          crossorigin="anonymous"
+        ></script>
+      </head>
+      <div className={styles.card}>
+        <Card
+          text="dark"
+          className="mb-5"
           style={{
+            width: "18rem",
             backgroundColor: "rgb(102, 178, 255)",
           }}
+          // style={{ height: "10rem", backgroundColor: "rgb(102, 178, 255)" }}
         >
-          <Card.Title style={{ backgroundColor: "rgb(102, 178, 255)" }}>
-            {data.topic}
-          </Card.Title>
-          <br></br>
-          <Card.Link
-            href={data.url}
-            target="_blank"
-            className={styles.link}
-            style={{ backgroundColor: "rgb(102, 178, 255)", color: "blue" }}
+          <Card.Header
+            style={{ color: "#000", fontSize: "20px", fontWeight: "bold" }}
           >
-            Click Here
-            {auth ? (
-              <span>
-                <Link to={"/notes/del/" + data._id} state={{ id: data._id }}>
-                  <AiFillDelete className={styles.icon} />
-                </Link>
-                <Link
-                  to={"/notes/update/" + data._id}
-                  state={{
-                    id: data._id,
-                    subject: data.subject,
-                    topic: data.topic,
-                    url: data.url,
-                  }}
-                >
-                  <GrUpdate className={styles.icon} />
-                </Link>
-              </span>
-            ) : null}
-          </Card.Link>
-        </Card.Body>
-      </Card>
-    </div>
+            {data.subject}
+          </Card.Header>
+          <Card.Body
+            style={{
+              backgroundColor: "rgb(102, 178, 255)",
+            }}
+          >
+            <Card.Title style={{ backgroundColor: "rgb(102, 178, 255)" }}>
+              {data.topic}
+            </Card.Title>
+            <br></br>
+            <Card.Link
+              href={data.url}
+              target="_blank"
+              className={styles.link}
+              style={{ backgroundColor: "rgb(102, 178, 255)", color: "blue" }}
+            >
+              Click Here
+              {auth ? (
+                <span>
+                  <Link to={"/notes/del/" + data._id} state={{ id: data._id }}>
+                    <AiFillDelete className={styles.icon} />
+                  </Link>
+                  <Link
+                    to={"/notes/update/" + data._id}
+                    state={{
+                      id: data._id,
+                      subject: data.subject,
+                      topic: data.topic,
+                      url: data.url,
+                    }}
+                  >
+                    <GrUpdate className={styles.icon} />
+                  </Link>
+                </span>
+              ) : null}
+            </Card.Link>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
   );
 };
 

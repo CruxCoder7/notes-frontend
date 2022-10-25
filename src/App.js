@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import PrivateRoutes from "./PrivateRoutes";
 import Notes from "./components/Notes";
 import LoginForm from "./components/LoginForm";
 import BlogPage from "./components/BlogPage";
@@ -20,20 +20,10 @@ function App() {
   const [err, setErr] = useState("");
 
   const Login = (token) => {
-    // if (
-    //   details.email === process.env.REACT_APP_ADMIN_EMAIL &&
-    //   details.password === process.env.REACT_APP_ADMIN_PASSWORD
-    // ) {
-    //   setauthenticated(true);
-    //   localStorage.setItem("authenticated", true);
-    //   navigate("/compose/blogs");
-    // } else {
-    //   setErr("Invalid Credentials!");
-    // }
     if (token) {
       setauthenticated(true);
       localStorage.setItem("authenticated", token);
-      navigate("/compose/blogs", { state: { token } });
+      navigate("/compose/blogs");
     } else {
       setErr("Invalid Credentials!");
     }
@@ -55,14 +45,10 @@ function App() {
           path="/admin"
           element={<LoginForm login={Login} err={err} setErr={setErr} />}
         ></Route>
-        <Route
-          path="/compose/blogs"
-          element={<Compose logout={Logout} />}
-        ></Route>
-        <Route
-          path="/compose/notes"
-          element={<AddNotes logout={Logout} />}
-        ></Route>
+        <Route element={<PrivateRoutes />}>
+          <Route path="/compose/blogs" element={<Compose logout={Logout} />} />
+          <Route path="/compose/notes" element={<AddNotes logout={Logout} />} />
+        </Route>
         <Route path="/:id" element={<Blog />}></Route>
         <Route
           path="/blogs/del/:id"
