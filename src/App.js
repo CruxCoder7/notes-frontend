@@ -18,10 +18,11 @@ function App() {
   );
 
   const [err, setErr] = useState("");
-
+  const [token, setToken] = useState("");
   const Login = (token) => {
     if (token) {
       setauthenticated(true);
+      setToken(token);
       localStorage.setItem("authenticated", token);
       navigate("/compose/blogs");
     } else {
@@ -45,7 +46,7 @@ function App() {
           path="/admin"
           element={<LoginForm login={Login} err={err} setErr={setErr} />}
         ></Route>
-        <Route element={<PrivateRoutes />}>
+        <Route element={<PrivateRoutes token={token} />}>
           <Route path="/compose/blogs" element={<Compose logout={Logout} />} />
           <Route path="/compose/notes" element={<AddNotes logout={Logout} />} />
         </Route>
