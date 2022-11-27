@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 
-const NoteComp = ({ data, auth }) => {
+const NoteComp = ({ data, auth, color }) => {
   return (
     <>
       <head>
@@ -30,10 +30,9 @@ const NoteComp = ({ data, auth }) => {
             width: "18rem",
             backgroundColor: "rgb(102, 178, 255)",
           }}
-          // style={{ height: "10rem", backgroundColor: "rgb(102, 178, 255)" }}
         >
           <Card.Header
-            style={{ color: "#000", fontSize: "20px", fontWeight: "bold" }}
+            style={{ color: color, fontSize: "20px", fontWeight: "bold" }}
           >
             {data.subject}
           </Card.Header>
@@ -85,7 +84,7 @@ function Notes({ auth, del }) {
   const [search, setSearch] = useState("");
   const { data } = useSWR(
     "https://notes-blog-backend.herokuapp.com/api/notes",
-    (url) => axios.get(url).then((r) => r.data)
+    (url) => axios.get(url).then((r) => r.data.slice(0, 10))
   );
 
   if (del) {
@@ -93,6 +92,7 @@ function Notes({ auth, del }) {
     const url = `https://notes-blog-backend.herokuapp.com/api/notes/del/${id}`;
     axios.get(url).then(navigate("/notes")).then(window.location.reload());
   }
+
   return (
     <>
       <div className={styles.note_container}>
@@ -120,7 +120,24 @@ function Notes({ auth, del }) {
               } else return 0;
             })
             .map((note, i) => {
-              return <NoteComp data={note} key={i} auth={auth}></NoteComp>;
+              return (
+                <NoteComp
+                  data={note}
+                  key={i}
+                  auth={auth}
+                  color={
+                    note.subject === "Programming in C"
+                      ? "lightgreen"
+                      : note.subject === "Linear Algebra"
+                      ? "purple"
+                      : note.subject === "Digital Design"
+                      ? "green"
+                      : note.subject === "Engineering Physics"
+                      ? "gray"
+                      : null
+                  }
+                ></NoteComp>
+              );
             })}
       </div>
     </>
