@@ -20,7 +20,8 @@ function Compose({ logout, update }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "https://notes-blog-backend.herokuapp.com/api/blogs";
+    const url =
+      "https://abdullahsheriff-backend.netlify.app/.netlify/functions/postBlog";
     axios
       .post(url, { title: title, content: content })
       .then(setTitle(""))
@@ -31,7 +32,7 @@ function Compose({ logout, update }) {
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
-    const url = `https://notes-blog-backend.herokuapp.com/api/blogs/update/${location.state.id}`;
+    const url = `https://abdullahsheriff-backend.netlify.app/.netlify/functions/updateBlog/${location.state.id}`;
     axios
       .patch(url, { title: title, content: content })
       .then(setTitle(""))

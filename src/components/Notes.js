@@ -88,7 +88,7 @@ function Notes({ auth, del }) {
   const [notesPerPage] = useState(9);
 
   const { data } = useSWR(
-    "https://notes-blog-backend.herokuapp.com/api/notes",
+    "https://abdullahsheriff-backend.netlify.app/.netlify/functions/getNotes",
     (url) => axios.get(url).then((r) => r.data)
   );
 
@@ -99,7 +99,7 @@ function Notes({ auth, del }) {
 
   if (del) {
     const { id } = location.state;
-    const url = `https://notes-blog-backend.herokuapp.com/api/notes/del/${id}`;
+    const url = `https://abdullahsheriff-backend.netlify.app/.netlify/functions/delNote/${id}`;
     axios.get(url).then(navigate("/notes")).then(window.location.reload());
   }
 

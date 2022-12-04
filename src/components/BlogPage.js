@@ -14,12 +14,12 @@ function BlogPage({ auth, del }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { data } = useSWR(
-    "https://notes-blog-backend.herokuapp.com/api/blogs",
+    "https://abdullahsheriff-backend.netlify.app/.netlify/functions/getBlogs",
     (url) => axios(url).then((r) => r.data)
   );
   if (del) {
     const { id } = location.state;
-    const url = `https://notes-blog-backend.herokuapp.com/api/blogs/del/${id}`;
+    const url = `https://abdullahsheriff-backend.netlify.app/.netlify/functions/delBlog/${id}`;
     axios.get(url).then(navigate("/")).then(window.location.reload());
   }
 

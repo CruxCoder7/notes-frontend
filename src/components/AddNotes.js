@@ -22,7 +22,8 @@ function AddNotes({ logout, update }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const URL = "https://notes-blog-backend.herokuapp.com/api/notes";
+    const URL =
+      "https://abdullahsheriff-backend.netlify.app/.netlify/functions/postNote";
     axios
       .post(URL, {
         subject: subject,
@@ -38,7 +39,7 @@ function AddNotes({ logout, update }) {
 
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
-    const URL = `https://notes-blog-backend.herokuapp.com/api/notes/update/${location.state.id}`;
+    const URL = `https://abdullahsheriff-backend.netlify.app/.netlify/functions/updateNote/${location.state.id}`;
     axios
       .patch(URL, {
         subject: subject,

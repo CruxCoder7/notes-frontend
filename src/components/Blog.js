@@ -8,15 +8,15 @@ function Blog() {
   const location = useLocation();
   const { id } = location.state;
   const { data } = useSWR(
-    `https://notes-blog-backend.herokuapp.com/api/blogs/${id}`,
+    `https://abdullahsheriff-backend.netlify.app/.netlify/functions/getSingleBlog/${id}`,
     (url) => axios(url).then((r) => r.data)
   );
   return (
     <div>
       <head>BLOG</head>
-      <h2 className={styles.heading}>{data && data.title}</h2>
+      <h2 className={styles.heading}>{data && data[0].title}</h2>
       <div className={styles.container}>
-        <div className={styles.content}>{data && data.content}</div>
+        <div className={styles.content}>{data && data[0].content}</div>
       </div>
     </div>
   );

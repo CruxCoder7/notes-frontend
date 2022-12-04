@@ -8,10 +8,14 @@ function LoginForm({ login, err, setErr }) {
   const [details, setDetails] = useState({ email: "", password: "" });
   const handleSubmit = (e) => {
     e.preventDefault();
-    const url = "https://notes-blog-backend.herokuapp.com/api/login";
+    const url =
+      "https://abdullahsheriff-backend.netlify.app/.netlify/functions/login";
     axios
       .post(url, { email: details.email, pwd: details.password })
-      .then((response) => login(response.data));
+      .then((response) => {
+        if (response.data === "false") login(false);
+        else login(response.data);
+      });
 
     setTimeout(() => {
       setErr("");

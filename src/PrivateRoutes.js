@@ -6,10 +6,12 @@ const PrivateRoutes = (props) => {
   const [tryy, setTryy] = useState("");
   const check = (new_token) => {
     try {
-      const url = "https://notes-blog-backend.herokuapp.com/api/verify";
+      const url =
+        "https://abdullahsheriff-backend.netlify.app/.netlify/functions/verify";
       axios
         .post(url, { token: new_token })
         .then((response) => {
+          console.log(response.data);
           setTryy(response.data.message);
         })
         .catch((err) => {
@@ -25,7 +27,6 @@ const PrivateRoutes = (props) => {
   }
   if ("authenticated" in localStorage) {
     check(localStorage.getItem("authenticated"));
-    console.log(tryy);
     if (tryy === "success") {
       return <Outlet />;
     }
