@@ -13,6 +13,7 @@ function Navbbar({ auth }) {
       style={{ backgroundColor: "#0A1929" }}
       className={styles.color_nav}
       expand="lg"
+      variant="white"
     >
       <Container style={{ backgroundColor: "#0A1929" }}>
         <Navbar.Brand href="/">
