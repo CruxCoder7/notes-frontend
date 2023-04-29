@@ -49,7 +49,7 @@ function BlogPage({ auth, del }) {
                     <Card.Text
                       style={{ backgroundColor: "rgb(102, 178, 255)" }}
                     >
-                      {blog.content.substring(0, 130)}
+                      {blog.content.substring(0, 110)}
                       <span style={{ backgroundColor: "rgb(102, 178, 255)" }}>
                         ...
                       </span>
