@@ -64,7 +64,7 @@ function BlogPage({ auth, del }) {
                     className={styles1.link}
                   >
                     <Link
-                      to={"/" + blog._id}
+                      to={"/blogs/" + blog._id}
                       style={{
                         backgroundColor: "rgb(102, 178, 255)",
                         textDecoration: "none",

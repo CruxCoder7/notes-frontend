@@ -50,7 +50,7 @@ function App() {
           <Route path="/compose/blogs" element={<Compose logout={Logout} />} />
           <Route path="/compose/notes" element={<AddNotes logout={Logout} />} />
         </Route>
-        <Route path="/:id" element={<Blog />}></Route>
+        <Route path="/blogs/:id" element={<Blog />}></Route>
         <Route
           path="/blogs/del/:id"
           element={<BlogPage auth={authenticated} del={true} />}
