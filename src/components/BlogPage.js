@@ -15,7 +15,7 @@ function BlogPage({ auth, del }) {
   const navigate = useNavigate();
   const { data } = useSWR(
     "https://abdullahsheriff-backend.netlify.app/.netlify/functions/getBlogs",
-    (url) => axios(url).then((r) => r.data)
+    (url) => axios(url).then((r) => r.data).catch(e => console.log(e))
   );
   if (del) {
     const { id } = location.state;
@@ -70,7 +70,6 @@ function BlogPage({ auth, del }) {
                         textDecoration: "none",
                         color: "blue",
                       }}
-                      state={{ id: blog._id }}
                     >
                       Read More
                     </Link>
