@@ -4,6 +4,6 @@
   status = 200
 
 [[redirects]]
-  from = "/644ce45147a741f408fdc4c1"
-  to = "https://abdullahsheriff.netlify.app/notes"
+  from = "/blogs/*"
+  to = "/notes"
   status = 200
